@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trần Tuấn Thanh | Backend Developer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        bgDark: '#030712', // gray-950
+                        bgCard: '#111827', // gray-900
+                        primary: '#06b6d4', // cyan-500
+                        secondary: '#8b5cf6', // violet-500
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030712;
+            color: #e5e7eb;
+        }
+        
+        /* Grid Background Pattern */
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Glowing text effect */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Custom Scrollbar for Dark Theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+        
+        /* Typing animation */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-primary selection:text-white relative">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-bgDark/80 backdrop-blur-md z-50 border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="font-mono font-bold text-2xl tracking-tighter text-white">
+                    <span class="text-primary">~/</span>Thanh<span class="text-secondary">.dev</span><span class="typing-cursor text-primary"></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-primary transition-colors">./giới_thiệu</a>
+                    <a href="#experience" class="text-sm font-medium text-gray-300 hover:text-primary transition-colors">./kinh_nghiệm</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-primary transition-colors">./dự_án</a>
+                    <a href="#skills" class="text-sm font-medium text-gray-300 hover:text-primary transition-colors">./kỹ_năng</a>
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-bold text-bgDark bg-gradient-to-r from-primary to-cyan-300 rounded-md hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all">
+                        Liên hệ ngay
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-bgCard border-b border-gray-800 absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-primary hover:bg-gray-800 rounded-md">./giới_thiệu</a>
+                <a href="#experience" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-primary hover:bg-gray-800 rounded-md">./kinh_nghiệm</a>
+                <a href="#projects" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-primary hover:bg-gray-800 rounded-md">./dự_án</a>
+                <a href="#skills" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-primary hover:bg-gray-800 rounded-md">./kỹ_năng</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-primary font-bold hover:bg-gray-800 rounded-md">./liên_hệ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center tech-grid overflow-hidden">
+        <!-- Glowing Orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Left Text -->
+            <div class="space-y-8">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-sm font-mono text-gray-300">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span>System Online & Ready</span>
+                </div>
+                
+                <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                    Hi, I'm <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-glow">Tuấn Thanh</span>
+                </h1>
+                
+                <p class="text-xl text-gray-400 font-light max-w-lg leading-relaxed">
+                    <strong class="text-white">Junior Backend Developer.</strong> Định hướng xây dựng kiến trúc cốt lõi vững chắc, tối ưu hóa database và mở rộng hệ thống (scalable). Sẵn sàng cho mọi thách thức logic.
+                </p>
+                
+                <div class="flex flex-wrap gap-5 pt-2">
+                    <a href="#projects" class="px-8 py-4 bg-white text-bgDark font-bold rounded-md hover:bg-gray-200 transition-all flex items-center">
+                        <i class="fas fa-terminal mr-2"></i> Khám phá Projects
+                    </a>
+                    <a href="https://github.com/tuanthanh7" target="_blank" class="px-8 py-4 bg-gray-800 text-white border border-gray-700 font-bold rounded-md hover:bg-gray-700 hover:border-gray-500 transition-all flex items-center">
+                        <i class="fab fa-github mr-2 text-xl"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Terminal -->
+            <div class="w-full relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative bg-bgCard rounded-xl border border-gray-700 shadow-2xl overflow-hidden">
+                    <!-- Mac Window Header -->
+                    <div class="bg-gray-800 px-4 py-3 border-b border-gray-700 flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="ml-4 text-xs font-mono text-gray-400">developer@thanh:~</span>
+                    </div>
+                    <!-- Terminal Body -->
+                    <div class="p-6 font-mono text-sm sm:text-base space-y-4">
+                        <div class="text-gray-300">
+                            <span class="text-green-400">➜</span> <span class="text-cyan-400">~</span> <span class="text-white">cat profile.json</span>
+                        </div>
+                        <div class="text-gray-400 pl-4">
+                            <span class="text-yellow-300">{</span><br>
+                            &nbsp;&nbsp;<span class="text-blue-400">"name"</span>: <span class="text-green-300">"Trần Tuấn Thanh"</span>,<br>
+                            &nbsp;&nbsp;<span class="text-blue-400">"role"</span>: <span class="text-green-300">"Junior Backend Developer"</span>,<br>
+                            &nbsp;&nbsp;<span class="text-blue-400">"mindset"</span>: <span class="text-green-300">"Solid Foundation & Clean Code"</span>,<br>
+                            &nbsp;&nbsp;<span class="text-blue-400">"skills"</span>: <span class="text-yellow-300">[</span><span class="text-green-300">"PHP"</span>, <span class="text-green-300">"Go"</span>, <span class="text-green-300">"Python"</span>, <span class="text-green-300">"MySQL"</span>, <span class="text-green-300">"Redis"</span><span class="text-yellow-300">]</span>,<br>
+                            &nbsp;&nbsp;<span class="text-blue-400">"learning_next"</span>: <span class="text-yellow-300">[</span><span class="text-green-300">"Java Enterprise"</span>, <span class="text-green-300">"Unity/C#"</span><span class="text-yellow-300">]</span><br>
+                            <span class="text-yellow-300">}</span>
+                        </div>
+                        <div class="text-gray-300">
+                            <span class="text-green-400">➜</span> <span class="text-cyan-400">~</span> <span class="typing-cursor"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triết lý (Mindset) Section -->
+    <section id="about" class="py-24 border-t border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16">
+                <span class="text-primary font-mono font-bold tracking-wider uppercase text-sm">01. mindset</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 text-white">Triết lý Phát Triển</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-bgCard p-8 rounded-xl border border-gray-800 hover:border-primary transition-colors group">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center text-2xl text-primary mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Kiến Trúc Vững Chắc</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Tôi tập trung thiết kế DB schema tối ưu, chuẩn hóa và áp dụng OOP/Design Patterns chặt chẽ. Một hệ thống tốt cần vững chắc từ những dòng code đầu tiên để dễ dàng mở rộng.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-bgCard p-8 rounded-xl border border-gray-800 hover:border-secondary transition-colors group">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center text-2xl text-secondary mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Tư Duy & Tốc Độ Học Hỏi</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Điểm mạnh của tôi là tư duy logic tốt. Tôi có thể giải quyết bug nhanh chóng và có khả năng đọc hiểu tài liệu, nắm bắt tech stack mới hoặc domain dự án trong thời gian ngắn.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-bgCard p-8 rounded-xl border border-gray-800 hover:border-green-500 transition-colors group">
+                    <div class="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center text-2xl text-green-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Định Hướng Đa Dạng</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Ngoài PHP, Go, Python, tôi đang định hướng đào sâu hệ sinh thái <strong>Java</strong> (Enterprise) và phát triển tư duy thuật toán thông qua lập trình game <strong>Unity</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 border-t border-gray-800 relative bg-bgCard/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16">
+                <span class="text-primary font-mono font-bold tracking-wider uppercase text-sm">02. experience</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 text-white">Kinh Nghiệm Làm Việc</h2>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative border-l border-gray-700 ml-3 md:ml-6 space-y-12">
+                
+                <!-- TienPhong CDS Item -->
+                <div class="relative pl-8 md:pl-12">
+                    <!-- Dot -->
+                    <div class="absolute w-4 h-4 bg-bgDark border-2 border-primary rounded-full -left-[9px] top-1"></div>
+                    
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                        <h3 class="text-2xl font-bold text-white">Junior Backend Developer</h3>
+                        <span class="text-primary font-mono text-sm mt-1 md:mt-0 px-3 py-1 bg-primary/10 rounded-md">08/2024 - Hiện tại</span>
+                    </div>
+                    <h4 class="text-lg text-gray-400 font-medium mb-6"><i class="fas fa-building mr-2"></i>TienPhong CDS</h4>
+                    
+                    <div class="bg-bgCard border border-gray-800 p-6 rounded-xl hover:border-gray-600 transition-colors">
+                        <ul class="space-y-4 text-gray-400 text-sm md:text-base leading-relaxed">
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">▹</span>
+                                <span><strong>Tối ưu hiệu suất API:</strong> Thiết kế lại schema, áp dụng Indexing và <strong>Redis Cache</strong>, giảm thiểu đáng kể độ trễ truy vấn database.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">▹</span>
+                                <span><strong>Security & Auth:</strong> Triển khai <strong>JWT</strong> và phân quyền (RBAC) đảm bảo bảo mật kết nối stateless giữa các module.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">▹</span>
+                                <span><strong>Queue & Background Jobs:</strong> Áp dụng cơ chế hàng đợi bất đồng bộ xử lý số lượng lớn notification, cải thiện thông lượng hệ thống.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">▹</span>
+                                <span><strong>Real-time & Payment:</strong> Tích hợp <strong>Firebase/Ably</strong> cho tin nhắn tức thời; và cổng thanh toán <strong>VNPAY</strong> cho hệ thống E-commerce.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">▹</span>
+                                <span><strong>CI/CD & DevOps:</strong> Cải thiện cấu trúc mã nguồn cũ, xây dựng pipeline CI/CD giúp giảm công sức deploy thủ công.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 border-t border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16">
+                <span class="text-secondary font-mono font-bold tracking-wider uppercase text-sm">03. projects</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 text-white">Dự Án Nổi Bật</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Tcareer -->
+                <div class="bg-bgCard border border-gray-800 rounded-xl p-8 flex flex-col group hover:border-secondary transition-all hover:-translate-y-2 relative overflow-hidden">
+                    <!-- Glow Background effect on hover -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div class="flex justify-between items-center mb-6 relative z-10">
+                        <i class="far fa-folder-open text-4xl text-secondary"></i>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/tuanthanh7/tcareer-sv-team" target="_blank" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-2 relative z-10 group-hover:text-secondary transition-colors">Tcareer</h3>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow relative z-10">
+                        Hệ thống kết hợp Mạng xã hội và Tìm kiếm Việc làm. Nền tảng cho phép người dùng tương tác, ứng tuyển trong cùng một hệ thống với hệ thống thông báo realtime.
+                    </p>
+                    
+                    <ul class="text-sm text-gray-500 mb-6 space-y-2 font-mono relative z-10">
+                        <li>> Tích hợp Firebase & Ably cho realtime notification/chat.</li>
+                        <li>> Thiết kế RESTful API hỗ trợ concurrent operations.</li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-3 font-mono text-xs text-secondary mt-auto relative z-10">
+                        <span class="bg-secondary/10 px-3 py-1 rounded">PHP</span>
+                        <span class="bg-secondary/10 px-3 py-1 rounded">Firebase</span>
+                        <span class="bg-secondary/10 px-3 py-1 rounded">MySQL</span>
+                        <span class="bg-secondary/10 px-3 py-1 rounded">REST API</span>
+                    </div>
+                </div>
+
+                <!-- Tmart -->
+                <div class="bg-bgCard border border-gray-800 rounded-xl p-8 flex flex-col group hover:border-primary transition-all hover:-translate-y-2 relative overflow-hidden">
+                    <!-- Glow Background effect on hover -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div class="flex justify-between items-center mb-6 relative z-10">
+                        <i class="far fa-folder-open text-4xl text-primary"></i>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/tuanthanh7/tmart-sv" target="_blank" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-2 relative z-10 group-hover:text-primary transition-colors">Tmart</h3>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow relative z-10">
+                        Nền tảng E-commerce bán đồ công nghệ đầy đủ tính năng. Xử lý nghiệp vụ phức tạp từ quản lý giỏ hàng, áp dụng mã giảm giá đến quy trình thanh toán an toàn.
+                    </p>
+                    
+                    <ul class="text-sm text-gray-500 mb-6 space-y-2 font-mono relative z-10">
+                        <li>> Hệ thống tính toán Coupon/Promotion đa dạng.</li>
+                        <li>> Xử lý transaction, đảm bảo Data Consistency.</li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-3 font-mono text-xs text-primary mt-auto relative z-10">
+                        <span class="bg-primary/10 px-3 py-1 rounded">Backend</span>
+                        <span class="bg-primary/10 px-3 py-1 rounded">E-commerce Flow</span>
+                        <span class="bg-primary/10 px-3 py-1 rounded">DB Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 border-t border-gray-800 relative bg-bgCard/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center">
+                <span class="text-primary font-mono font-bold tracking-wider uppercase text-sm">04. stack</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 text-white">Kỹ Năng Kỹ Thuật</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Languages -->
+                <div class="bg-bgDark border border-gray-800 p-6 rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all">
+                    <div class="text-white mb-4 border-b border-gray-800 pb-2 font-bold text-lg flex items-center">
+                        <i class="fas fa-code text-primary mr-2"></i> Ngôn ngữ
+                    </div>
+                    <ul class="space-y-3 font-mono text-gray-400 text-sm">
+                        <li class="flex items-center"><i class="fab fa-php text-indigo-400 w-6"></i> PHP</li>
+                        <li class="flex items-center"><i class="fab fa-golang text-cyan-400 w-6"></i> Go</li>
+                        <li class="flex items-center"><i class="fab fa-python text-yellow-400 w-6"></i> Python</li>
+                        <li class="flex items-center"><i class="fab fa-java text-red-400 w-6"></i> Java</li>
+                        <li class="flex items-center text-gray-500"><i class="fab fa-windows w-6"></i> C# (Unity Plan)</li>
+                    </ul>
+                </div>
+
+                <!-- Frameworks -->
+                <div class="bg-bgDark border border-gray-800 p-6 rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all">
+                    <div class="text-white mb-4 border-b border-gray-800 pb-2 font-bold text-lg flex items-center">
+                        <i class="fas fa-layer-group text-secondary mr-2"></i> Frameworks
+                    </div>
+                    <ul class="space-y-3 font-mono text-gray-400 text-sm">
+                        <li class="flex items-center"><span class="text-red-500 mr-2">■</span> Laravel / Lumen</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">■</span> Spring Boot</li>
+                        <li class="flex items-center"><span class="text-blue-500 mr-2">■</span> RESTful API</li>
+                        <li class="flex items-center"><span class="text-yellow-500 mr-2">■</span> MVC / OOP</li>
+                    </ul>
+                </div>
+
+                <!-- Database & Cache -->
+                <div class="bg-bgDark border border-gray-800 p-6 rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all">
+                    <div class="text-white mb-4 border-b border-gray-800 pb-2 font-bold text-lg flex items-center">
+                        <i class="fas fa-database text-green-500 mr-2"></i> Data & DB
+                    </div>
+                    <ul class="space-y-3 font-mono text-gray-400 text-sm">
+                        <li class="flex items-center"><i class="fas fa-server text-blue-400 w-6"></i> MySQL</li>
+                        <li class="flex items-center"><i class="fas fa-bolt text-yellow-500 w-6"></i> Redis Cache</li>
+                        <li class="flex items-center"><span class="text-gray-500 mr-2">></span> Query Optimization</li>
+                        <li class="flex items-center"><span class="text-gray-500 mr-2">></span> Indexing & Normalization</li>
+                    </ul>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="bg-bgDark border border-gray-800 p-6 rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all">
+                    <div class="text-white mb-4 border-b border-gray-800 pb-2 font-bold text-lg flex items-center">
+                        <i class="fas fa-tools text-orange-500 mr-2"></i> Công cụ
+                    </div>
+                    <ul class="space-y-3 font-mono text-gray-400 text-sm">
+                        <li class="flex items-center"><i class="fab fa-git-alt text-orange-500 w-6"></i> Git / Github</li>
+                        <li class="flex items-center"><i class="fab fa-docker text-blue-500 w-6"></i> Docker</li>
+                        <li class="flex items-center"><i class="fas fa-sync text-green-400 w-6"></i> CI/CD Pipeline</li>
+                        <li class="flex items-center"><i class="fas fa-fire text-yellow-500 w-6"></i> Firebase / Ably</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Education Box -->
+            <div class="mt-12 bg-bgCard border border-gray-800 p-6 md:p-8 rounded-xl flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Đại học Kỹ thuật Công nghệ Cần Thơ</h3>
+                    <p class="text-gray-400 font-mono text-sm">Cử nhân Công nghệ Thông tin</p>
+                </div>
+                <div class="text-right">
+                    <div class="bg-gray-800 px-4 py-2 rounded-md font-mono text-primary border border-gray-700 mb-2 inline-block">
+                        GPA: 3.67 / 4.0
+                    </div>
+                    <p class="text-gray-500 text-sm">2020 - 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 border-t border-gray-800 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="text-primary font-mono font-bold tracking-wider uppercase text-sm mb-4 block">05. What's Next?</span>
+            <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white">Get In Touch</h2>
+            <p class="text-gray-400 text-lg mb-10 leading-relaxed">
+                Dù bạn đang có một cơ hội việc làm, một dự án hay đơn giản là muốn thảo luận về kiến trúc hệ thống, backend code, tôi luôn sẵn sàng lắng nghe và trao đổi.
+            </p>
+            
+            <a href="mailto:trantuanthanh2002.st@gmail.com" class="inline-block px-10 py-4 bg-transparent text-primary font-mono border border-primary rounded hover:bg-primary/10 transition-all text-lg mb-8">
+                Say Hello
+            </a>
+            
+            <div class="flex justify-center items-center gap-6 text-2xl text-gray-500">
+                <a href="https://github.com/tuanthanh7" target="_blank" class="hover:text-white transition-colors" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-primary transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="tel:0379086874" class="hover:text-green-500 transition-colors" title="Zalo/Phone"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center border-t border-gray-900 bg-bgDark">
+        <p class="text-gray-600 font-mono text-xs">
+            Designed & Built by Tran Tuan Thanh <br>
+            <span class="text-primary mt-1 inline-block">&copy; 2026</span>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Blur effect navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
