@@ -26,7 +26,7 @@ export default function Certificates({ certificates, t }) {
           </div>
         </div>
 
-        <button className="certificate-card reveal" onClick={() => setOpen(current)}>
+        <button className={`certificate-card reveal${current.cropToFill ? " certificate-card-fill" : ""}`} onClick={() => setOpen(current)}>
           <div className="certificate-image">
             <img src={current.image} alt={current.title} onError={(e) => e.currentTarget.style.display = "none"} />
             <div className="certificate-placeholder">{t.fallback}</div>
