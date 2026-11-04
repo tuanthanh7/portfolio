@@ -23,6 +23,27 @@ button { border: 0; background: none; cursor: pointer; color: inherit; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--ink); color: var(--paper); }
 
+.device-notice-backdrop {
+  position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center;
+  padding: 22px; background: rgba(16,16,16,.58); backdrop-filter: blur(8px);
+}
+.device-notice {
+  width: min(100%, 420px); padding: 28px; color: var(--ink); background: var(--paper);
+  border: 1px solid rgba(16,16,16,.14); box-shadow: 0 24px 80px rgba(0,0,0,.24);
+}
+.device-notice-kicker { font-size: 9px; font-weight: 800; letter-spacing: .2em; color: var(--accent); }
+.device-notice h2 { margin: 18px 0 10px; font-size: clamp(25px, 7vw, 34px); line-height: .98; letter-spacing: -.055em; }
+.device-notice p { margin: 0; max-width: 34em; color: #5e5c57; font-size: 14px; line-height: 1.6; }
+.device-notice-continue {
+  display: flex; width: 100%; justify-content: space-between; align-items: center; margin-top: 24px;
+  padding: 15px 17px; color: var(--white); background: var(--ink); font-size: 10px;
+  font-weight: 800; letter-spacing: .13em;
+}
+.device-notice-continue span { font-size: 17px; }
+@media (min-width: 761px) and (orientation: portrait) {
+  .device-notice-backdrop { padding: 28px; }
+}
+
 .navbar {
   position: fixed; z-index: 1000; top: 0; left: 0; right: 0;
   height: 82px; padding: 0 var(--pad);

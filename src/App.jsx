@@ -21,6 +21,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const [activeProject, setActiveProject] = useState(0);
+  const [showDeviceNotice, setShowDeviceNotice] = useState(() =>
+    window.matchMedia("(max-width: 760px), (orientation: portrait)").matches &&
+    sessionStorage.getItem("portfolio-device-notice-dismissed") !== "1"
+  );
   const [language, setLanguage] = useState(() => localStorage.getItem("portfolio-language") === "vi" ? "vi" : "en");
   const lenisRef = useRef(null);
   const t = translations[language];
@@ -38,6 +42,11 @@ export default function App() {
     localStorage.setItem("portfolio-language", next);
     return next;
   });
+
+  const dismissDeviceNotice = () => {
+    sessionStorage.setItem("portfolio-device-notice-dismissed", "1");
+    setShowDeviceNotice(false);
+  };
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -133,6 +142,20 @@ export default function App() {
 
   return (
     <>
+      {showDeviceNotice && (
+        <div className="device-notice-backdrop" role="presentation">
+          <section className="device-notice" role="dialog" aria-modal="true" aria-labelledby="device-notice-title">
+            <span className="device-notice-kicker">{language === "vi" ? "GỢI Ý TRẢI NGHIỆM" : "VIEWING NOTE"}</span>
+            <h2 id="device-notice-title">{language === "vi" ? "Tốt nhất trên máy tính." : "Best viewed on desktop."}</h2>
+            <p>{language === "vi"
+              ? "Portfolio hiện được tối ưu cho màn hình máy tính. Bạn vẫn có thể tiếp tục xem trên thiết bị này."
+              : "This portfolio is currently optimized for desktop screens. You can still continue on this device."}</p>
+            <button className="device-notice-continue" type="button" onClick={dismissDeviceNotice}>
+              {language === "vi" ? "TIẾP TỤC VÀO TRANG" : "CONTINUE TO SITE"}<span aria-hidden="true">↗</span>
+            </button>
+          </section>
+        </div>
+      )}
       <CustomCursor />
       <Navbar language={language} onToggleLanguage={changeLanguage} t={t} />
 
