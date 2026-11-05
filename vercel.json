@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
+      "source": "/portfolio/favicon-v2.png",
+      "destination": "/favicon-v2.png"
+    },
+    {
+      "source": "/portfolio/favicon.png",
+      "destination": "/favicon.png"
+    },
+    {
       "source": "/portfolio/assets/:path*",
       "destination": "/assets/:path*"
     },
