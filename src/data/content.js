@@ -64,7 +64,7 @@ export const journey = [
 export const certificates = [
   { title: "Giấy khen tốt nghiệp loại Xuất sắc", issuer: "ĐẠI HỌC KỸ THUẬT – CÔNG NGHỆ CẦN THƠ · 2024", image: "/portfolio/assets/certificates/academic-award.png", cropToFill: true },
   { title: "Foundations of Cybersecurity", issuer: "COURSERA · GOOGLE · 2026", image: "/portfolio/assets/certificates/coursera-foundations-of-cybersecurity.png", pdf: "/portfolio/assets/certificates/coursera-foundations-of-cybersecurity.pdf", contain: true },
-  { title: "Google AI Essentials", issuer: "COURSERA · GOOGLE · 2025", image: "/portfolio/assets/certificates/google-ai-essentials.png" },
+  { title: "Google AI Essentials", issuer: "COURSERA · GOOGLE · 2025", image: "/portfolio/assets/certificates/google-ai-essentials-coursera.png", pdf: "/portfolio/assets/certificates/google-ai-essentials-coursera.pdf", contain: true },
   { title: "Cẩm nang về tên miền .vn", issuer: "VNNIC INTERNET ACADEMY · 2025", image: "/portfolio/assets/certificates/vnnic-domain.png" },
   { title: "Xây dựng một website chất lượng", issuer: "BỆ PHÓNG VIỆT NAM DIGITAL 4.0", image: "/portfolio/assets/certificates/digital-website.jpg" },
   { title: "Xây dựng một thương hiệu dễ nhớ", issuer: "BỆ PHÓNG VIỆT NAM DIGITAL 4.0", image: "/portfolio/assets/certificates/digital-brand.jpg" },

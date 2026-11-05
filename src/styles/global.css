@@ -362,6 +362,10 @@ html:lang(en) .about-layout > .display-heading { font-size: clamp(48px, 6.4vw, 1
 .certificate-lightbox-info h3 { margin: 12px 0 28px; font-size: clamp(22px, 3vw, 36px); line-height: 1.05; letter-spacing: -.04em; }
 .certificate-lightbox-info h4 { margin: 0 0 12px; font-size: 9px; letter-spacing: .16em; }
 .certificate-lightbox-info ul { margin: 0; padding-left: 18px; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.7; }
+.certificate-skill-tags { margin-top: 22px; }
+.certificate-skill-tags h4 { margin-bottom: 10px; }
+.certificate-skill-tags > div { display: flex; flex-wrap: wrap; gap: 7px; }
+.certificate-skill-tags span { padding: 7px 9px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; color: rgba(255,255,255,.8); font-size: 8px; letter-spacing: .07em; }
 .certificate-pdf-link { display: inline-flex; margin-top: 24px; padding: 12px 15px; border: 1px solid rgba(255,255,255,.4); font-size: 9px; font-weight: 800; letter-spacing: .14em; }
 
 .project-visual { width: 100%; padding: 0; color: inherit; text-align: left; cursor: pointer; }

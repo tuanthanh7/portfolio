@@ -52,6 +52,12 @@ export default function Certificates({ certificates, t }) {
                   <ul>{open.learningPoints.map((point) => <li key={point}>{point}</li>)}</ul>
                 </>
               )}
+              {open.skillTags?.length > 0 && (
+                <div className="certificate-skill-tags">
+                  <h4>{t.skills}</h4>
+                  <div>{open.skillTags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                </div>
+              )}
               {open.pdf && <a className="certificate-pdf-link" href={open.pdf} target="_blank" rel="noreferrer">{t.download} ↗</a>}
             </div>
           </div>

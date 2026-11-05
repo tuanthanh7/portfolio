@@ -39,7 +39,8 @@ export default function App() {
     ...item,
     title: t.certificates.items[index],
     issuer: t.certificates.issuers[index],
-    learningPoints: t.certificates.learnings[index] ?? item.learningPoints
+    learningPoints: t.certificates.learnings[index] ?? item.learningPoints,
+    skillTags: t.certificates.skillTags[index] ?? item.skillTags
   }));
 
   const changeLanguage = () => setLanguage((current) => {
