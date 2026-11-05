@@ -26,7 +26,7 @@ export default function Certificates({ certificates, t }) {
           </div>
         </div>
 
-        <button className={`certificate-card reveal${current.cropToFill ? " certificate-card-fill" : ""}`} onClick={() => setOpen(current)}>
+        <button className={`certificate-card reveal${current.cropToFill ? " certificate-card-fill" : ""}${current.contain ? " certificate-card-contain" : ""}`} onClick={() => setOpen(current)}>
           <div className="certificate-image">
             <img src={current.image} alt={current.title} onError={(e) => e.currentTarget.style.display = "none"} />
             <div className="certificate-placeholder">{t.fallback}</div>
@@ -40,8 +40,21 @@ export default function Certificates({ certificates, t }) {
 
       {open && (
         <div className="lightbox" onClick={() => setOpen(null)}>
-          <button className="lightbox-close" aria-label={t.close}><X /></button>
-          <img className="certificate-full" src={open.image} alt={open.title} />
+          <button className="lightbox-close" aria-label={t.close} onClick={() => setOpen(null)}><X /></button>
+          <div className="certificate-lightbox-content" onClick={(event) => event.stopPropagation()}>
+            <img className="certificate-full" src={open.image} alt={open.title} />
+            <div className="certificate-lightbox-info">
+              <span>{open.issuer}</span>
+              <h3>{open.title}</h3>
+              {open.learningPoints?.length > 0 && (
+                <>
+                  <h4>{t.learning}</h4>
+                  <ul>{open.learningPoints.map((point) => <li key={point}>{point}</li>)}</ul>
+                </>
+              )}
+              {open.pdf && <a className="certificate-pdf-link" href={open.pdf} target="_blank" rel="noreferrer">{t.download} ↗</a>}
+            </div>
+          </div>
         </div>
       )}
     </section>

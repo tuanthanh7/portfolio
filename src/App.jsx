@@ -35,7 +35,12 @@ export default function App() {
     gallery: project.gallery.map((image, imageIndex) => ({ ...image, title: t.projects[index].gallery[imageIndex] ?? image.title }))
   }));
   const localizedJourney = journey.map((item, index) => ({ ...item, title: t.journey.items[index], description: t.journey.descriptions[index] }));
-  const localizedCertificates = certificates.map((item, index) => ({ ...item, title: t.certificates.items[index], issuer: t.certificates.issuers[index] }));
+  const localizedCertificates = certificates.map((item, index) => ({
+    ...item,
+    title: t.certificates.items[index],
+    issuer: t.certificates.issuers[index],
+    learningPoints: t.certificates.learnings[index] ?? item.learningPoints
+  }));
 
   const changeLanguage = () => setLanguage((current) => {
     const next = current === "en" ? "vi" : "en";
