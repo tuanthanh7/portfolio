@@ -56,7 +56,10 @@ export default function App() {
     const lenis = new Lenis({
       duration: 1.15,
       smoothWheel: true,
-      syncTouch: true
+      // Let the browser handle touch momentum natively on mobile. Lenis remains
+      // responsible for wheel scrolling on desktop.
+      syncTouch: false,
+      smoothTouch: false
     });
     lenisRef.current = lenis;
 

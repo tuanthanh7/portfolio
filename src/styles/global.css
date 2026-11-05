@@ -389,6 +389,7 @@ html:lang(en) .about-layout > .display-heading { font-size: clamp(48px, 6.4vw, 1
 .project-image-lightbox > span { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.72); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; text-align: center; }
 .project-shot figcaption { display: flex; justify-content: space-between; gap: 10px; padding-top: 12px; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
 .project-shot figcaption span:last-child { color: var(--muted); white-space: nowrap; }
+.project-detail-mobile-close { display: none; }
 
 .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 3000; transform: translate3d(-100px,-100px,0); }
 .cursor-dot { width: 6px; height: 6px; margin: -3px; background: var(--accent); border-radius: 50%; }
@@ -424,14 +425,18 @@ html:lang(en) .about-layout > .display-heading { font-size: clamp(48px, 6.4vw, 1
 @media (max-width: 620px) {
   :root { --pad: 20px; }
   .navbar { height: 68px; }
-  .hero { min-height: 100svh; padding-top: 110px; align-items: start; }
-  .hero-copy { width: 100%; }
-  .hero-title { font-size: clamp(64px, 19vw, 110px); }
-  .hero-title-indent { padding-left: 8vw; }
-  .hero-intro { width: 75%; font-size: 14px; margin-top: 35px; }
-  .hero-actions { flex-wrap: wrap; gap: 12px; }
-  .hero-person { right: 5%; bottom: -1%; width: auto; height: 64vh; max-height: 560px; opacity: .9; }
-  .hero-phone-wrap { width: 31vw; right: 1%; top: 38%; }
+  .hero { min-height: 100svh; padding: 105px var(--pad) 68px; align-items: start; }
+  .hero-copy { width: 100%; z-index: 6; }
+  .hero-eyebrow { margin-bottom: 22px; }
+  .hero-title { font-size: clamp(58px, 17vw, 78px); line-height: .82; }
+  .hero-title-indent { padding-left: 7vw; }
+  .hero-intro { width: min(88%, 310px); font-size: 13px; line-height: 1.5; margin: 26px 0 22px; }
+  .hero-actions { position: relative; z-index: 6; max-width: 290px; flex-wrap: wrap; gap: 10px 14px; }
+  .hero-actions .button { padding: 13px 16px; }
+  .cv-download { background: rgba(241,239,233,.84); }
+  .hero-person { right: -10%; bottom: 0; width: auto; height: 47svh; max-height: 390px; opacity: 1; z-index: 2; }
+  .hero-phone-wrap { width: clamp(66px, 20vw, 86px); right: 7%; top: auto; bottom: 15%; transform: rotate(4deg); z-index: 4; }
+  .hero-phone { filter: drop-shadow(0 12px 16px rgba(0,0,0,.2)); }
   .phone-label, .hero-side-note { display: none; }
   .hero-meta { bottom: 18px; font-size: 7px; }
   .section { padding-top: 100px; padding-bottom: 100px; }
@@ -457,8 +462,9 @@ html:lang(en) .about-layout > .display-heading { font-size: clamp(48px, 6.4vw, 1
   .stats strong { font-size: 23px; }
   .project-layout { min-height: auto; }
   .project-info h2 { font-size: clamp(54px, 15vw, 92px); }
-  .project-visual { min-height: max(62vh, 400px); }
-  .project-visual-inner { width: min(52%, 200px); min-width: 0; }
+  .projects-pin { overflow: visible; }
+  .project-visual { min-height: clamp(320px, 50svh, 420px); align-items: start; padding: 20px 0 42px; }
+  .project-visual-inner { width: min(68%, 230px); min-width: 0; }
   .project-bottom { margin-top: 44px; font-size: 7px; }
   .tech-groups { grid-template-columns: 1fr; }
   .tech-group:nth-child(odd), .tech-group:nth-child(even) { padding-left: 0; padding-right: 0; border-right: 0; }
@@ -473,13 +479,33 @@ html:lang(en) .about-layout > .display-heading { font-size: clamp(48px, 6.4vw, 1
   .project-detail { height: 100svh; width: 100%; padding: 22px 20px 40px; }
   .project-detail-columns { grid-template-columns: 1fr; gap: 32px; }
   .project-detail-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
-  .project-shot-image { height: 330px; }
+  /* Keep project screenshots in compact, PC-like preview frames on phones. */
+  .project-shot-image { height: auto; aspect-ratio: 0.78; }
+  .project-shot-phone .project-shot-image img { width: 100%; height: 100%; object-fit: contain; }
   .project-shot-desktop { grid-column: 1 / -1; }
   .project-shot-desktop .project-shot-image { height: auto; aspect-ratio: 1.9; }
   .project-shot-evidence { grid-column: 1 / -1; }
   .project-shot-evidence .project-shot-image { height: auto; aspect-ratio: 1.9; }
   .project-shot figcaption { display: grid; font-size: 8px; }
+  .project-detail-mobile-close {
+    position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+    z-index: 2600; display: flex; align-items: center; justify-content: center;
+    gap: 9px; width: max-content; min-height: 46px; padding: 0 18px;
+    border-radius: 999px; background: var(--ink); color: var(--white); box-shadow: 0 8px 24px rgba(0,0,0,.24);
+    font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  }
   .cursor-dot, .cursor-ring { display: none; }
+}
+
+
+@media (max-width: 620px) {
+  html, body { overscroll-behavior-y: auto; }
+  .project-detail { overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; }
+  .project-detail-backdrop { touch-action: pan-y; }
+  .project-detail-gallery { align-items: start; }
+  .project-shot figcaption { line-height: 1.5; }
+  .project-shot figcaption span:last-child { white-space: normal; }
+  .footer { gap: 16px; line-height: 1.5; }
 }
 
 html:lang(vi) .display-heading { font-size: clamp(48px, 8vw, 128px); line-height: .96; letter-spacing: -.055em; }
@@ -514,4 +540,37 @@ html:lang(vi) .contact-title { line-height: .92; letter-spacing: -.065em; }
   .education-summary { grid-template-columns: 1fr; gap: 28px; }
   .education-summary-facts { grid-template-columns: .6fr 1.4fr; gap: 10px; }
   .education-summary-facts > div { padding-left: 12px; }
+}
+
+/* Keep project details and their product preview visible together on phones. */
+@media (max-width: 620px) {
+  .projects-section { min-height: 0; }
+  .projects-pin { display: block; min-height: 0; padding: 86px var(--pad) 28px; }
+  .project-heading { margin-bottom: 8px; }
+  .project-layout {
+    flex: 0 0 auto; min-height: 0; grid-template-columns: minmax(0, 1.1fr) minmax(100px, .9fr);
+    align-items: start; gap: 12px; padding-top: 18px;
+  }
+  .project-info { max-width: none; }
+  .project-category { font-size: 8px; line-height: 1.5; letter-spacing: .12em; }
+  .project-role { margin: 8px 0 0; font-size: 8px; line-height: 1.5; letter-spacing: .07em; }
+  .project-info h2 { margin: 12px 0 16px; font-size: clamp(32px, 10vw, 46px); line-height: .94; }
+  .project-description { font-size: 12px; line-height: 1.5; }
+  .project-info > .tech-list { gap: 5px; margin: 13px 0; }
+  .project-info > .tech-list span { padding: 5px 7px; font-size: 8px; letter-spacing: .06em; }
+  .project-actions { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .project-actions .button { padding: 10px 12px; font-size: 8px; }
+  .github-link { font-size: 8px; }
+  .project-nav { gap: 6px; margin-top: 15px; }
+  .project-nav button { width: 36px; height: 36px; }
+  .project-nav svg { width: 18px; height: 18px; }
+  .project-visual { min-height: clamp(260px, 42svh, 340px); align-items: center; padding: 14px 6px; }
+  .project-visual-inner { width: 100%; max-width: 190px; }
+  .project-visual-number { right: 8px; top: 10px; font-size: 7px; }
+  .visual-caption { left: 8px; bottom: 9px; font-size: 6px; }
+  .project-bottom { margin-top: 18px; }
+}
+
+@media (max-width: 620px) {
+  html:lang(vi) .project-info h2 { font-size: clamp(30px, 9.4vw, 42px); line-height: .96; }
 }

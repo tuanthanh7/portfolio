@@ -63,6 +63,9 @@ function ProjectDetail({ project, onClose, t, lenisRef }) {
           ))}
         </div>
       </article>
+      <button className="project-detail-mobile-close" type="button" onClick={onClose}>
+        <X size={16} /><span>{t.close}</span>
+      </button>
       {expandedImage && createPortal(
         <div className="project-image-lightbox" role="dialog" aria-modal="true" aria-label={expandedImage.title} onClick={(event) => { if (event.target === event.currentTarget) setExpandedImage(null); }}>
           <button className="lightbox-close" type="button" aria-label={t.closeImage} onClick={() => setExpandedImage(null)}><X /></button>
