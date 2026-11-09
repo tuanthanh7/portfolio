@@ -6,6 +6,8 @@ import PhoneMockup from "../components/PhoneMockup";
 
 function ProjectDetail({ project, onClose, t, lenisRef }) {
   const [expandedImage, setExpandedImage] = useState(null);
+  const phoneShots = project.gallery.filter((item) => item.kind === "phone");
+  const wideShots = project.gallery.filter((item) => item.kind !== "phone");
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -50,17 +52,42 @@ function ProjectDetail({ project, onClose, t, lenisRef }) {
         </div>
         <div className="project-gallery-heading"><span>{t.interface} / {String(project.gallery.length).padStart(2, "0")} {t.screens}</span><span>{t.archive}</span></div>
         <div className="project-detail-gallery">
-          {project.gallery.map((item) => (
-            <figure className={`project-shot project-shot-${item.kind}`} key={item.image}>
-              <div className="project-shot-image">
-                <button className="project-image-trigger" type="button" onClick={() => setExpandedImage(item)} aria-label={`${t.zoomImage}: ${item.title}`}>
-                  <img src={item.image} alt={item.title} loading="lazy" />
-                  <span className="project-image-zoom" aria-hidden="true"><ZoomIn size={17} /></span>
-                </button>
+          {phoneShots.length > 0 && (
+            <section className="project-gallery-group">
+              <h3>{t.mobileScreens}</h3>
+              <div className="project-gallery-group-grid">
+                {phoneShots.map((item) => (
+                  <figure className="project-shot project-shot-phone" key={item.image}>
+                    <div className="project-shot-image">
+                      <button className="project-image-trigger" type="button" onClick={() => setExpandedImage(item)} aria-label={`${t.zoomImage}: ${item.title}`}>
+                        <img src={item.image} alt={item.title} loading="lazy" />
+                        <span className="project-image-zoom" aria-hidden="true"><ZoomIn size={17} /></span>
+                      </button>
+                    </div>
+                    <figcaption><span>{item.title}</span><span>{t.mobile}</span></figcaption>
+                  </figure>
+                ))}
               </div>
-              <figcaption><span>{item.title}</span><span>{item.kind === "evidence" ? t.backend : item.kind === "phone" ? t.mobile : t.admin}</span></figcaption>
-            </figure>
-          ))}
+            </section>
+          )}
+          {wideShots.length > 0 && (
+            <section className="project-gallery-group project-gallery-group-wide">
+              <h3>{t.wideScreens}</h3>
+              <div className="project-gallery-group-grid">
+                {wideShots.map((item) => (
+                  <figure className={`project-shot project-shot-${item.kind}`} key={item.image}>
+                    <div className="project-shot-image">
+                      <button className="project-image-trigger" type="button" onClick={() => setExpandedImage(item)} aria-label={`${t.zoomImage}: ${item.title}`}>
+                        <img src={item.image} alt={item.title} loading="lazy" />
+                        <span className="project-image-zoom" aria-hidden="true"><ZoomIn size={17} /></span>
+                      </button>
+                    </div>
+                    <figcaption><span>{item.title}</span><span>{item.kind === "evidence" ? t.backend : t.admin}</span></figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </article>
       <button className="project-detail-mobile-close" type="button" onClick={onClose}>
